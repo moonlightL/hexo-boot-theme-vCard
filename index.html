@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{theme/vCard/layout}">
+
+<head></head>
+<body>
+	<div layout:fragment="content">
+		<div class="box box-content">
+			<div class="pb-2">
+				<h1 class="title title--h1 first-title title__separate">主页</h1>
+			</div>
+
+			<!-- News -->
+			<div class="news-grid">
+				<!-- Post -->
+				<article class="news-item box"  th:each="post,iterStat : ${pageInfo.data}">
+					<a th:href="@{'/' + ${post.link}}" style="text-decoration: none">
+						<div class="news-item__image-wrap overlay overlay--45" th:data-category="${post.categoryName}" th:data-tags="${#strings.isEmpty(post.tags) ? '无' : post.tags}">
+							<div class="news-item__date">[[${post.month + '月' + post.day + '日'}]]<span>[[${post.year}]]年</span></div>
+							<span class="new-item__top" th:if="${post.top}"><img src="/theme/vCard/source/images/article-top.png" alt="" width="64" height="64"></span>
+							<img class="cover lazyload" th:src="@{${post.coverUrl}}" alt="" />
+						</div>
+						<div class="news-item__caption">
+							<h2 class="title title--h4" th:text="${post.title}"></h2>
+							<span title="浏览数" style="color:#5E6E80"><i class="fa fa-eye"></i> [[${post.readNum}]]</span>
+							<span class="pull-right" title="评论数" style="color:#5E6E80"><i class="fa fa-comments-o"></i> [[${post.commentNum}]]</span>
+							<hr>
+							<p class="text-center"><a th:href="@{'/' + ${post.link}}" style="color:#5E6E80;text-decoration: none;"><strong>阅读全文</strong></a></p>
+						</div>
+					</a>
+				</article>
+			</div>
+			<br>
+			<nav class="text-center">
+				<span th:if="${pageInfo.hasPreviousPage}" class="page">
+					<a class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/' : '/page/' + ${pageInfo.pageNum-1}+'/'}" ><i class="fa fa-angle-left"></i></a>
+				</span>
+				<span th:if="${pageInfo.hasPreviousPage == false}" class="page">
+					<a class="prev page-numbers" href="javascript:void(0)" ><i class="fa fa-angle-left"></i></a>
+				</span>
+				<span th:each="pageNum : ${pageInfo.navigatepageNums}" class="page">
+					<a th:if="${pageNum == pageInfo.pageNum}" href="javascript:void(0)" th:text="${pageNum}" class="page-numbers current"></a>
+					<a th:if="${pageNum != pageInfo.pageNum}" th:href="@{'/page/' + ${pageNum}+'/'}" th:text="${pageNum}" class="page-numbers hidden-xs"></a>
+				</span>
+				<span th:if="${pageInfo.hasNextPage}" class="page">
+					<a class="next page-numbers" th:href="@{'/page/' + ${pageInfo.pageNum+1}+'/'}" ><i class="fa fa-angle-right"></i></a>
+				</span>
+				<span th:if="${pageInfo.hasNextPage == false}" class="page">
+					<a class="next page-numbers" href="javascript:void(0)"><i class="fa fa-angle-right"></i></a>
+				</span>
+			</nav>
+		</div>
+	</div>
+</body>
+</html>

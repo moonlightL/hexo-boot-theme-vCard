@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <!-- Meta Data -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${#servletContext.getAttribute('configMap')['blog_name']}">个人博客</title>
+    <meta name="author" th:content="${#servletContext.getAttribute('configMap')['blog_author']}">
+    <meta name="keywords" th:content="${#servletContext.getAttribute('configMap')['keywords']}" />
+    <link rel="shortcut icon" th:href="@{${#servletContext.getAttribute('configMap')['favicon_url']}}"/>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" th:href="@{${prefix} + '/source/images/favicons/favicon.png'}" type="image/png">
+    <link rel="stylesheet" th:href="@{${prefix} + '/source/styles/animate.css'}">
+    <link rel="stylesheet" th:href="@{${prefix} + '/source/js/bootstrap-3.3.7/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{${prefix} + '/source/fonts/font-awesome/css/font-awesome.min.css'}"/>
+    <link rel="stylesheet" th:href="@{'/admin/assets/custom/jquery-search/jquery.search.css'}"/>
+    <link rel="stylesheet" th:href="@{'/admin/assets/js/plugins/highlightjs/styles/github-gist.css'}"/>
+    <link rel="stylesheet" th:href="@{${prefix} + '/source/js/lightbox/css/lightbox.css'}"/>
+    <link rel="stylesheet" th:href="@{${prefix} + '/source/js/overshare/css/share.min.css'}"/>
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" th:href="@{${prefix} + '/source/styles/style.css'}"/>
+    <script th:src="@{${prefix} + '/source/js/jquery-3.4.1.min.js'}"></script>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader">
+    <div class="preloader__wrap">
+        <div class="circle-pulse">
+            <div class="circle-pulse__1"></div>
+            <div class="circle-pulse__2"></div>
+        </div>
+        <div class="preloader__progress"><span></span></div>
+    </div>
+</div>
+
+<!-- Scroll Indicator -->
+<div class="scroll-line"></div>
+
+<main class="main">
+    <!-- Header Image -->
+    <div class="header-image">
+        <div class="js-parallax" th:style="'background-image: url(' + ${prefix} + '/source/images/image_header.jpg' + ');'"></div>
+    </div>
+
+    <div class="container gutter-top">
+        <!-- Header -->
+        <header class="header box">
+            <div class="header__left">
+                <div class="header__photo">
+                    <img class="header__photo-img" th:src="@{${#strings.isEmpty(#servletContext.getAttribute('configMap')['logo_url']) != true ? #servletContext.getAttribute('configMap')['logo_url'] : prefix + '/source/images/logo.svg'}}" width="48" height="48">
+                </div>
+                <div class="header__base-info">
+                    <h2 class="title titl--h4" th:text="${#servletContext.getAttribute('configMap')['blog_name']}"></h2>
+                    <ul class="header__social">
+                        <li th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['git_hub_account']) != true}"><a th:href="@{${#servletContext.getAttribute('configMap')['git_hub_account']}}" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                        <li th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['qq_account']) != true}"><a class="social-way" title="qq号,点击复制" th:data-clipboard-text="${#servletContext.getAttribute('configMap')['qq_account']}"><i class="fa fa-qq social-btn"></i></a></li>
+                        <li th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['wx_account']) != true}"><a class="social-way" title="微信号,点击复制" th:data-clipboard-text="${#servletContext.getAttribute('configMap')['wx_account']}"><i class="fa fa-wechat social-btn"></i></a></li>
+                        <li th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['email']) != true}"><a class="social-way" title="邮箱,点击复制" th:data-clipboard-text="${#servletContext.getAttribute('configMap')['email']}"><i class="fa fa-envelope-o social-btn"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header__right">
+                <ul class="header__contact">
+                    <li><a th:href="@{/archives/}"><span class="overhead">文章数</span><span th:text="${countInfo['postNum']}"></span></a></li>
+                    <li><a th:href="@{/categories/}"><span class="overhead">分类数</span><span th:text="${countInfo['categoryNum']}">无</span></a></li>
+                </ul>
+                <ul class="header__contact">
+                    <li><a th:href="@{/friendLinks/}"><span class="overhead">友链数</span><span th:text="${countInfo['friendLinkNum']}"></span></a></li>
+                    <li><span class="overhead">运行天数</span><span id="runDay"></span></li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="row sticky-parent">
+            <!-- Sidebar nav -->
+            <aside class="col-12 col-md-12 col-lg-2">
+                <div class="sidebar box sticky-column">
+                    <ul class="nav">
+                        <li class="nav__item"><a th:href="@{/}" th:class="${menu eq 'index' ? 'active' : ''}"><i class="fa fa-home fa-2x"></i>主页</a></li>
+                        <li class="nav__item"><a th:href="@{/archives/}" th:class="${menu eq 'archives' ? 'active' : ''}"><i class="fa fa-file-archive-o fa-2x"></i>归档</a></li>
+                        <li class="nav__item"><a th:href="@{/categories/}" th:class="${menu eq 'categories' ? 'active' : ''}"><i class="fa fa-file-o fa-2x"></i> 分类</a></li>
+                        <li class="nav__item"><a th:href="@{/about/}" th:class="${menu eq 'about' ? 'active' : ''}"><i class="fa fa-user-o fa-2x"></i>关于</a></li>
+                        <li class="nav__item"><a href="javascript:void(0)" data-real-time-search><i class="fa fa-search fa-2x"></i>搜索</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Content -->
+            <div class="col-12 col-md-12 col-lg-10">
+                <div layout:fragment="content" ></div>
+                <!-- Footer -->
+                <footer class="footer" th:text="${#servletContext.getAttribute('configMap')['power_by']}">© 2020 vCard</footer>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="real-time-search-container" id="real-time-search-container"></div>
+
+<div class="back-to-top"></div>
+
+<!-- SVG masks -->
+<svg class="svg-defs">
+    <clipPath id="avatar-box">
+        <path d="M1.85379 38.4859C2.9221 18.6653 18.6653 2.92275 38.4858 1.85453 56.0986.905299 77.2792 0 94 0c16.721 0 37.901.905299 55.514 1.85453 19.821 1.06822 35.564 16.81077 36.632 36.63137C187.095 56.0922 188 77.267 188 94c0 16.733-.905 37.908-1.854 55.514-1.068 19.821-16.811 35.563-36.632 36.631C131.901 187.095 110.721 188 94 188c-16.7208 0-37.9014-.905-55.5142-1.855-19.8205-1.068-35.5637-16.81-36.63201-36.631C.904831 131.908 0 110.733 0 94c0-16.733.904831-37.9078 1.85379-55.5141z"/>
+    </clipPath>
+    <clipPath id="avatar-hexagon">
+        <path d="M0 27.2891c0-4.6662 2.4889-8.976 6.52491-11.2986L31.308 1.72845c3.98-2.290382 8.8697-2.305446 12.8637-.03963l25.234 14.31558C73.4807 18.3162 76 22.6478 76 27.3426V56.684c0 4.6805-2.5041 9.0013-6.5597 11.3186L44.4317 82.2915c-3.9869 2.278-8.8765 2.278-12.8634 0L6.55974 68.0026C2.50414 65.6853 0 61.3645 0 56.684V27.2891z"/>
+    </clipPath>
+</svg>
+
+<!-- JavaScripts -->
+<script th:src="@{${prefix} + '/source/js/plugins.min.js'}"></script>
+<script th:src="@{'/admin/assets/js/plugins/layer/layer.js'}"></script>
+<script th:src="@{'/admin/assets/custom/jquery-search/jquery.hideseek.min.js'}" ></script>
+<script th:src="@{'/admin/assets/custom/jquery-search/jquery.search.js'}" ></script>
+<script th:src="@{'/admin/assets/js/plugins/clipboard/clipboard.min.js'}"></script>
+<script th:src="@{${prefix} + '/source/js/common.js'}"></script>
+<script th:inline="javascript">
+    let installTime = [[${#servletContext.getAttribute('configMap')['install_time']}]];
+    let $runDay = $("#runDay");
+    setInterval(function () {
+        let date1 = installTime;
+        let date2 = new Date();
+        let date3 = date2.getTime() - new Date(date1).getTime();
+        //计算出相差天数
+        let days = Math.floor(date3/(24*3600*1000));
+
+        //计算出小时数
+        let leave1 = date3%(24*3600*1000);
+        let hours = Math.floor(leave1/(3600*1000));
+        //计算相差分钟数
+        let leave2 = leave1%(3600*1000) ;
+        let minutes = Math.floor(leave2/(60*1000));
+        //计算相差秒数
+        let leave3 = leave2%(60*1000);
+        let seconds = Math.round(leave3/1000);
+        $runDay.html(days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒");
+    }, 1000);
+</script>
+
+<span th:if="${isDetail == false}">
+    <script type='text/javascript' th:src="@{${prefix} + '/source/js/jqueryLazyload/jquery.lazyload.min.js'}"></script>
+    <script type="text/javascript" charset="utf-8">
+       ;(function () {
+           $("img.lazy").lazyload({effect: "fadeIn"});
+       })(jQuery);
+   </script>
+</span>
+<span th:if="${isDetail == true}">
+    <script type='text/javascript' th:src="@{${prefix} + '/source/js/lightbox/js/lightbox.min.js'}"></script>
+    <script type='text/javascript' th:src="@{'/admin/assets/js/plugins/highlightjs/highlight.pack.js'}"></script>
+    <script type='text/javascript' th:src="@{${prefix} + '/source/js/overshare/js/social-share.min.js'}"></script>
+    <script type='text/javascript'>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('figure span').forEach(function(block) {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</span>
+</body>

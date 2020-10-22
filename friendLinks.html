@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{theme/vCard/layout}">
+
+<head></head>
+<body>
+<div layout:fragment="content">
+    <div class="box box-content">
+        <div class="pb-2">
+            <h1 class="title title--h1 first-title title__separate">友链([[${friendLinkNum}]])</h1>
+        </div>
+
+        <div class="mt-1">
+            <h2 class="title title--h3">博客网址</h2>
+            <div class="row">
+                <div class="col-12 col-md-4" th:each="friendLink : ${bloggerList}">
+                    <div class="case-item">
+						<a th:href="${friendLink.homeUrl}" target="_blank">
+							<div>
+								<h3 class="title title--h4" th:text="${friendLink.title}"></h3>
+							</div>
+							<p class="case-item__caption" th:text="${friendLink.remark}"></p>
+						</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<div class="mt-1">
+			<h2 class="title title--h3">常用网址</h2>
+			<div class="row">
+				<div class="col-12 col-md-4" th:each="friendLink : ${webSiteList}">
+					<div class="case-item">
+						<a th:href="${friendLink.homeUrl}" target="_blank">
+							<div>
+								<h3 class="title title--h4" th:text="${friendLink.title}"></h3>
+							</div>
+							<p class="case-item__caption" th:text="${friendLink.remark}"></p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+</body>
+</html>
