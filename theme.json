@@ -1,5 +1,12 @@
 {
   "name": "vCard",
-  "preview": "/theme/vCard/preview.png",
-  "remark": "vCard主题"
+  "remark": "vCard主题",
+  "extension": [
+    {
+      "key": "pageSize",
+      "value": "10",
+      "type": "input",
+      "label": "页面大小"
+    }
+  ]
 }

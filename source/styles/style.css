@@ -669,7 +669,7 @@ button:focus {
   height: 100%;
   overflow: hidden;
   text-align: center;
-  z-index: 1106;
+  z-index: 10001;
   opacity: 1;
 }
 .preloader > * {
@@ -2714,4 +2714,8 @@ nav .page a:not(.current):hover {
 
 .comment-list .comment-list-page-bar ul li a:hover {
   background-color: #5c73ec !important;
+}
+
+.lightboxOverlay {
+  z-index: 10000 !important;
 }
