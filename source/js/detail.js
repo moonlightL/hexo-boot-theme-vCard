@@ -2,10 +2,26 @@ let CommentManager = (function ($) {
 
     let CommentManager = {
         init: function (nickname, postId, comment) {
-            CommentManager.initComment(nickname, postId, comment);
+            let flag = false;
+            let $footer = $("#footer-copyright");
+            let top = parseInt($footer.offset().top);
+            let winHeight = $(window).height();
+
+            if (top > winHeight) {
+                $(window).scroll(function(e) {
+                    let scrollTop = $(this).scrollTop();
+                    if (!flag && (winHeight + scrollTop >= top)) {
+                        // 获取评论列表
+                        flag = true;
+                        CommentManager.initComment(nickname, postId, comment);
+                    }
+                });
+            } else {
+                CommentManager.initComment(nickname, postId, comment);
+            }
             CommentManager.bindEvent(postId);
         },
-        initComment: function (nickname, postId, comment) {
+        initComment: function (nickname, postId) {
             $("#comment-container").BeautyComment({
                 title: "评论",
                 subTitle: "最新评论",
@@ -14,12 +30,12 @@ let CommentManager = (function ($) {
                 listUrl: "/commentList.json",
                 sendUrl: "/auth/sendComment.json",
                 wrapClass: "ml-content",
-                canComment: comment,
                 ajaxParams: {postId: postId, pageNum: 1, pageSize: 10},
                 listHandler: function (resp) {
                     return {
-                        totalNum: resp.data.total,
-                        commentList: resp.data.list
+                        totalNum: resp.data.totalNum,
+                        commentList: resp.data.commentList,
+                        commentShowType: resp.data.commentShowType
                     }
                 },
                 sendHandler: function (resp) {

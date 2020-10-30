@@ -91,7 +91,7 @@
             <div class="col-12 col-md-12 col-lg-10">
                 <div layout:fragment="content" ></div>
                 <!-- Footer -->
-                <footer class="footer" th:text="${#servletContext.getAttribute('configMap')['power_by']}">© 2020 vCard</footer>
+                <footer id="footer-copyright" class="footer" th:text="${#servletContext.getAttribute('configMap')['power_by']}">© 2020 vCard</footer>
             </div>
         </div>
     </div>
@@ -150,9 +150,9 @@
    </script>
 </span>
 <span th:if="${isDetail == true}">
+    <script type='text/javascript' th:src="@{${prefix} + '/source/js/lightbox/js/lightbox.min.js'}"></script>
     <script type='text/javascript' th:src="@{'/admin/assets/js/plugins/highlightjs/highlight.pack.js'}"></script>
     <script type='text/javascript' th:src="@{${prefix} + '/source/js/overshare/js/social-share.min.js'}"></script>
-    <script type='text/javascript' th:src="@{${prefix} + '/source/js/lightbox/js/lightbox.min.js'}"></script>
     <script type='text/javascript'>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('figure span').forEach(function(block) {

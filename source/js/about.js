@@ -2,6 +2,24 @@ let GuestBookManager = (function ($) {
 
     let GuestBookManager = {
         init: function (nickname) {
+            let flag = false;
+            let $footer = $("#footer-copyright");
+            let top = parseInt($footer.offset().top);
+            let winHeight = $(window).height();
+            if (top > winHeight) {
+                $(window).scroll(function(e) {
+                    let scrollTop = $(this).scrollTop();
+                    if (!flag && (winHeight + scrollTop >= top)) {
+                        // 获取留言列表
+                        flag = true;
+                        GuestBookManager.initComment(nickname);
+                    }
+                });
+            } else {
+                GuestBookManager.initComment(nickname);
+            }
+        },
+        initComment: function (nickname) {
             $("#comment-container").BeautyComment({
                 title: "留言",
                 subTitle: "最新留言",
@@ -13,8 +31,9 @@ let GuestBookManager = (function ($) {
                 ajaxParams: {pageNum: 1, pageSize: 10},
                 listHandler: function (resp) {
                     return {
-                        totalNum: resp.data.total,
-                        commentList: resp.data.list
+                        totalNum: resp.data.totalNum,
+                        commentList: resp.data.commentList,
+                        commentShowType: resp.data.commentShowType
                     }
                 },
                 sendHandler: function (resp) {

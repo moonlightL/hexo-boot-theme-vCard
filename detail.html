@@ -33,11 +33,18 @@
 					</div>
 				</div>
 
+				<div class="post-tags">
+					<div class="tags" th:if="${#strings.isEmpty(post.tags) == false}">
+						<a th:href="@{'/tags/' + ${tag} + '/'}" rel="tag" th:each="tag,status : ${#strings.arraySplit(post.tags, ',')}"><i class="fa fa-tag"></i> [[${tag}]]</a>
+					</div>
+				</div>
+
 				<footer class="footer-post">
 					<div class="social-share" data-initialized="true">
 						<a href="#" class="social-share-icon icon-weibo"></a>
 						<a href="#" class="social-share-icon icon-qq"></a>
 						<a href="#" class="social-share-icon icon-qzone"></a>
+						<a href="#" class="social-share-icon icon-wechat"></a>
 					</div>
 				</footer>
 
@@ -55,6 +62,11 @@
 					</ul>
 				</div>
 			</div>
+			
+			<div class="post-other-info">
+				<a th:href="${'/' + previousPost.link}" class="prev pull-left" th:if="${#objects.nullSafe(previousPost, null)}">上一篇<span class="hidden-xs">：《[[${previousPost.title}]]》</span></a>
+				<a th:href="${'/' + nextPost.link}" class="next pull-right" th:if="${#objects.nullSafe(nextPost, null)}">下一篇<span class="hidden-xs">：《[[${nextPost.title}]]》</span></a>
+			</div>
 
 			<div id="comment-container" class="comment-container"></div>
 
@@ -63,9 +75,11 @@
 		<script th:src="@{'/admin/assets/custom/jquery-comment/jquery-comment.js'}"></script>
 		<script th:src="@{${prefix} + '/source/js/detail.js'}"></script>
 		<script type="text/javascript" th:inline="javascript">
-			let nickname = [[${#servletContext.getAttribute('configMap')['blog_author']}]];
-			let postId= [[${post.id}]];
-			CommentManager.init(nickname, [[${post.id}]], [[${post.comment}]]);
+			$(function () {
+				let nickname = [[${#servletContext.getAttribute('configMap')['blog_author']}]];
+				let postId= [[${post.id}]];
+				CommentManager.init(nickname, postId);
+			});
 		</script>
 	</div>
 </body>

@@ -2631,12 +2631,37 @@ nav .page a:not(.current):hover {
   word-break: break-word;
 }
 
-.post-copyright {
+.postContainer .post-tags {
+  margin-top: 20px;
+}
+
+.postContainer .post-tags a {
+  display: inline-block;
+  padding: 5px;
+  background-color: #aeb0bb;
+  color: #fff;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.postContainer .post-tags a:hover {
+  background-color: #5c73ec !important;
+}
+
+.postContainer .post-other-info {
+  margin-bottom: 50px;
+}
+
+.postContainer .post-other-info a:hover {
+  color: #5c73ec !important;
+}
+
+.postContainer .post-copyright {
   list-style: none;
   padding: 0;
 }
 
-.post-copyright a {
+.postContainer .post-copyright a {
   word-wrap:break-word;
 }
 
