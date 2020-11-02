@@ -1,7 +1,7 @@
 @import url(vendors/bootstrap.min.css);
 @import url(vendors/swiper.min.css);
 /*@import url(../icons/style.css);*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap");
+@import url("../fonts/googleapis/fonts.googleapis.css?family=Poppins:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap");
 /* -----------------------------------------------------------------
     - General Styles
 ----------------------------------------------------------------- */
@@ -669,7 +669,7 @@ button:focus {
   height: 100%;
   overflow: hidden;
   text-align: center;
-  z-index: 10001;
+  z-index: 1106;
   opacity: 1;
 }
 .preloader > * {
@@ -2644,16 +2644,8 @@ nav .page a:not(.current):hover {
   margin-right: 5px;
 }
 
-.postContainer .post-tags a:hover {
-  background-color: #5c73ec !important;
-}
-
 .postContainer .post-other-info {
   margin-bottom: 50px;
-}
-
-.postContainer .post-other-info a:hover {
-  color: #5c73ec !important;
 }
 
 .postContainer .post-copyright {
@@ -2739,8 +2731,4 @@ nav .page a:not(.current):hover {
 
 .comment-list .comment-list-page-bar ul li a:hover {
   background-color: #5c73ec !important;
-}
-
-.lightboxOverlay {
-  z-index: 10000 !important;
 }
