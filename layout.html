@@ -8,8 +8,8 @@
     <title th:text="${#servletContext.getAttribute('configMap')['blog_name']}">个人博客</title>
     <meta name="author" th:content="${#servletContext.getAttribute('configMap')['blog_author']}">
     <meta name="keywords" th:content="${#servletContext.getAttribute('configMap')['keywords']}" />
+    [(${#servletContext.getAttribute('configMap')['meta_code']})]
     <link rel="shortcut icon" th:href="@{${#servletContext.getAttribute('configMap')['favicon_url']}}"/>
-
     <!-- Favicons -->
     <link rel="shortcut icon" th:href="@{${prefix} + '/source/images/favicons/favicon.png'}" type="image/png">
     <link rel="stylesheet" th:href="@{${prefix} + '/source/styles/animate.css'}">
