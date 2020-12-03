@@ -79,6 +79,7 @@
 				CommentManager.init([[${post.id}]], [[${post.comment}]]);
 			});
 		</script>
+		[(${#servletContext.getAttribute('configMap')['script_code']})]
 	</div>
 </body>
 </html>
