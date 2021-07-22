@@ -3,7 +3,7 @@
 
 <head>
 	<title th:text="${#servletContext.getAttribute('configMap')['blog_name']} + ' | ' + ${post.title}"></title>
-	<link rel="stylesheet" th:href="@{'/admin/assets/custom/jquery-comment/jquery-comment.css'}">
+	<link rel="stylesheet" th:href="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.css'}">
 </head>
 <body>
 	<div layout:fragment="content">
@@ -25,7 +25,7 @@
 					</div>
 				</header>
 
-				<div class="caption-post post-content" th:data-id="${post.id}" th:utext="${md.md2html(post.id, post.content, 2)}"></div>
+				<div class="caption-post post-content" th:data-id="${post.id}" th:utext="${post.contentHtml}"></div>
 
 				<div id="share" class="shareContainer">
 					<div class="btns">
@@ -71,8 +71,8 @@
 			<div id="comment-container" class="comment-container"></div>
 
 		</div>
-		<script th:src="@{'/admin/assets/custom/jquery-comment/jquery.cookie.js'}"></script>
-		<script th:src="@{'/admin/assets/custom/jquery-comment/jquery-comment.js'}"></script>
+		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery.cookie.js'}"></script>
+		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.js'}"></script>
 		<script th:src="@{${prefix} + '/source/js/detail.js'}"></script>
 		<script type="text/javascript" th:inline="javascript">
 			$(function () {

@@ -437,4 +437,9 @@ $(document).ready(function() {
         e.clearSelection();
     });
 
+    $("img.lazyload").lazyload({
+        placeholder : baseLink + "/source/images/loading.jpg",
+        effect: "fadeIn"
+    });
+
 });

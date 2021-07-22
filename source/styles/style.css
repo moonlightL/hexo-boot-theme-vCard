@@ -2533,6 +2533,7 @@ nav .page a {
   color: #5E6E80;
   border-radius: 5px;
   background-color: #e4e7ea;
+  margin: 0 .5rem;
 }
 
 nav .page a.current {
@@ -2675,60 +2676,4 @@ nav .page a:not(.current):hover {
   background-color: #5c73ec !important;
   color: #fff !important;
   padding: 5px;
-}
-
-.comment-container {
-  margin-top: 2rem;
-}
-
-.comment-container .comment-data .comment-data-title, .comment-container .comment-list .comment-list-title {
-  border-bottom: none !important;
-}
-
-.comment-data-body .comment-data-body-btns .emoji-container .emoji-container-btn {
-  margin-top: -5px !important;
-}
-
-.comment-data-body .comment-data-body-info img {
-  margin-top: -5px !important;
-}
-
-.comment-data-body .comment-data-body-btns .input-container {
-  top: 6px !important;
-}
-
-.comment-data-body .comment-data-body-btns .send-message-btn {
-  background-color: #5c73ec !important;
-  border: 1px solid #5c73ec !important;
-  border-radius: 2px !important;
-  padding: 6px !important;
-}
-
-.comment-data-body .comment-data-body-btns .send-message-btn:hover {
-  background-color: #556ada !important;
-}
-
-.comment-container .comment-list .comment-list-item .date {
-  background-color: #5c73ec !important;
-}
-
-.comment-list .comment-list-page-bar ul li {
-  background-color: #5c73ec !important;
-}
-
-.comment-list .comment-list-page-bar ul li {
-  background-color: #e4e7ea !important;
-
-}
-
-.comment-list .comment-list-page-bar ul li a {
-  color: #fff;
-}
-
-.comment-list .comment-list-page-bar ul li.active {
-  background-color: #5c73ec !important;
-}
-
-.comment-list .comment-list-page-bar ul li a:hover {
-  background-color: #5c73ec !important;
 }
