@@ -2652,6 +2652,7 @@ nav .page a:not(.current):hover {
 .postContainer .post-copyright {
   list-style: none;
   padding: 0;
+  text-align: left;
 }
 
 .postContainer .post-copyright a {

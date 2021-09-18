@@ -64,11 +64,11 @@
             </div>
             <div class="header__right">
                 <ul class="header__contact">
-                    <li><a th:href="@{/archives/}"><span class="overhead">文章数</span><span th:text="${countInfo['postNum']}"></span></a></li>
-                    <li><a th:href="@{/categories/}"><span class="overhead">分类数</span><span th:text="${countInfo['categoryNum']}">无</span></a></li>
+                    <li><a th:href="@{/archives/}"><span class="overhead">文章数</span><span th:text="${#servletContext.getAttribute('postNum')}"></span></a></li>
+                    <li><a th:href="@{/categories/}"><span class="overhead">分类数</span><span th:text="${#servletContext.getAttribute('categoryNum')}">无</span></a></li>
                 </ul>
                 <ul class="header__contact">
-                    <li><a th:href="@{/friendLinks/}"><span class="overhead">友链数</span><span th:text="${countInfo['friendLinkNum']}"></span></a></li>
+                    <li><a th:href="@{/friendLinks/}"><span class="overhead">友链数</span><span th:text="${#servletContext.getAttribute('friendLinkNum')}"></span></a></li>
                     <li><span class="overhead">运行天数</span><span id="runDay"></span></li>
                 </ul>
             </div>
