@@ -3,7 +3,6 @@
 
 <head>
 	<title th:text="${#servletContext.getAttribute('configMap')['blog_name']} + ' | ' + ${post.title}"></title>
-	<link rel="stylesheet" th:href="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.css'}">
 </head>
 <body>
 	<div layout:fragment="content">
@@ -68,17 +67,13 @@
 				<a th:href="${'/' + nextPost.link}" class="next pull-right" th:if="${#objects.nullSafe(nextPost, null)}">下一篇<span class="hidden-xs">：《[[${nextPost.title}]]》</span></a>
 			</div>
 
-			<div id="comment-container" class="comment-container"></div>
+			<!-- 评论 -->
+			<script type="text/javascript" th:inline="javascript">
+				window.canComment = [[${post.comment}]];
+			</script>
+			<div th:replace="~{theme/vCard/common :: comment}"></div>
 
 		</div>
-		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery.cookie.js'}"></script>
-		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.js'}"></script>
-		<script th:src="@{${prefix} + '/source/js/detail.js'}"></script>
-		<script type="text/javascript" th:inline="javascript">
-			$(function () {
-				CommentManager.init([[${post.id}]], [[${post.comment}]]);
-			});
-		</script>
 		[(${#servletContext.getAttribute('configMap')['script_code']})]
 	</div>
 </body>

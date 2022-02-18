@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common-link">
+
+</div>
+<div th:fragment="common-script">
+
+</div>
+
+<div th:fragment="comment">
+    <div class="hb-comment"></div>
+    <script type='text/javascript' th:src="@{${baseLink} + '/source/js/hb-comment/hb-comment.js'}"></script>
+    <script th:inline="javascript">
+        HbComment.init({
+            el: ".hb-comment",
+            baseUrl: [[${baseLink}]] + "/source/js",
+            wrapClass: ""
+        });
+    </script>
+</div>
+</html>

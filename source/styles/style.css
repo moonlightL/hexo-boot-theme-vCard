@@ -1015,7 +1015,6 @@ button:focus {
 .avatar {
   display: block;
   height: 100%;
-  width: 100%;
 }
 .avatar--180 {
   max-height: 11.25rem;

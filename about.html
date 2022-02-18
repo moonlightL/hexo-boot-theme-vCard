@@ -3,7 +3,6 @@
 
 <head>
 	<title th:text="${#servletContext.getAttribute('configMap')['blog_name']} + ' | 关于'"></title>
-	<link rel="stylesheet" th:href="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.css'}">
 </head>
 <body>
 	<div layout:fragment="content">
@@ -27,16 +26,9 @@
 					</li>
 				</ul>
 			</div>
-			<div id="comment-container" class="comment-container"></div>
+
+			<div th:replace="~{theme/vCard/common :: comment}"></div>
 		</div>
-		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery.cookie.js'}"></script>
-		<script th:src="@{${baseLink} + '/source/js/jquery-comment/jquery-comment.js'}"></script>
-		<script th:src="@{${prefix} + '/source/js/about.js'}"></script>
-		<script type="text/javascript" th:inline="javascript">
-			$(function () {
-				GuestBookManager.init();
-			});
-		</script>
 	</div>
 </body>
 </html>
