@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{theme/vCard/layout}">
+
+<head></head>
+<body>
+<div layout:fragment="content">
+    <div class="box box-content">
+        <div class="pb-2">
+            <h1 class="title title--h1 first-title title__separate" style="display: inline-block">【[[${album.name}]]】<small>专辑详情</small></h1>
+            <a th:href="@{'/albums/'}" class="pull-right">返回</a>
+        </div>
+
+        <div class="ml-content-body">
+            <div class="row" th:if="${album.detailType == 1}">
+                <div class="col-sm-6 col-md-3" th:each="detail,iterStat: ${pageInfo.data}">
+                    <div class="album-detail-item animate-box" data-animate-effect="fadeIn">
+                        <a class="fancybox" th:href="@{${detail.url}}" data-fancybox="gallery">
+                            <img th:data-original="@{${detail.url}}" class="lazyload">
+                            <div class="mask"><i class="fa fa-search-plus"></i></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" th:if="${album.detailType == 2}">
+                <div class="col-sm-12 col-md-4" th:each="detail,iterStat: ${pageInfo.data}">
+                    <div class="album-detail-item animate-box">
+                        <a href="javascript:void(0)" th:data-url="${detail.url}" class="play-btn">
+                            <img th:data-original="@{${detail.coverUrl}}" class="lazyload">
+                            <div class="mask"><i class="fa fa-play"></i></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${pageInfo.total == 0}">
+                <div style="text-align:center;">
+                    ~~暂无数据~~
+                </div>
+            </div>
+        </div>
+
+        <nav class="text-center">
+                    <span th:if="${pageInfo.hasPreviousPage}" class="page">
+                        <a data-pjax class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/albumDetail/' + ${album.id} + '/': '/albumDetail/' + ${album.id} + '/' + ${pageInfo.pageNum-1}+'/'}" ><i class="fa fa-angle-left"></i></a>
+                    </span>
+            <span th:each="pageNum : ${pageInfo.navigatepageNums}" th:if="${pageInfo.navigatepageNums.length} le '4' " class="page">
+                        <a th:if="${pageNum == pageInfo.pageNum}" href="javascript:void(0)" class="page-numbers current" th:text="${pageNum}"></a>
+                        <span class="page" th:if="${pageNum != pageInfo.pageNum}">
+                            <a data-pjax th:href="@{${pageNum} == 1 ? '/albumDetail/' + ${album.id} + '/': '/albumDetail/' + ${album.id} + '/' + ${pageNum}+'/'}" th:text="${pageNum}"></a>
+                        </span>
+                    </span>
+            <span th:each="pageNum, iterStat : ${pageInfo.navigatepageNums}" th:if="${pageInfo.navigatepageNums.length} gt '4' " class="page">
+                           <span class="page" th:if="${pageNum == pageInfo.pageNum and iterStat.count gt 2 and iterStat.count le iterStat.size}">...</span>
+                           <a th:if="${pageNum == pageInfo.pageNum}" href="javascript:void(0)" class="page-numbers current"  th:text="${pageNum}"></a>
+                           <span class="page" th:if="${pageNum == pageInfo.pageNum and iterStat.count le (iterStat.size - 2)}">...</span>
+                           <span th:if="${pageNum != pageInfo.pageNum}">
+                               <span class="page" th:if="${iterStat.count == 1}" ><a data-pjax th:href="@{'/albumDetail/' + ${album.id} + '/1/'}" th:text="1"></a></span>
+                               <span class="page" th:if="${iterStat.count == (iterStat.size)}"><a data-pjax th:href="@{'/albumDetail/' + ${album.id} + '/' +  ${pageNum} +'/'}" th:text="${pageNum}"></a></span>
+                            </span>
+                       </span>
+            <span th:if="${pageInfo.hasNextPage}" class="page">
+                        <a data-pjax class="next page-numbers" th:href="@{'/albumDetail/' + ${album.id} + '/' +  ${pageInfo.pageNum + 1}+'/'}" ><i class="fa fa-angle-right"></i></a>
+                    </span>
+        </nav>
+
+    </div>
+    <script>
+        let pageContainer = document.getElementById("pageContainer");
+        let playBtnList = document.getElementsByClassName("play-btn");
+        for (let i = 0; i < playBtnList.length; i++) {
+            let playBtn = playBtnList[i];
+            let url = playBtn.dataset.url;
+            playBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                let videoMask = document.createElement("div");
+                videoMask.setAttribute("class", "video-mask");
+                pageContainer.appendChild(videoMask);
+                let video = document.createElement("video");
+                video.setAttribute("src", url);
+                video.setAttribute("class", "video-self");
+                video.setAttribute("controls", "controls");
+                video.setAttribute("autoplay", "autoplay");
+                videoMask.appendChild(video);
+                let close = document.createElement("div");
+                close.setAttribute("class", "video-close");
+                close.setAttribute("title", "关闭");
+                close.innerHTML = "x"
+                videoMask.appendChild(close);
+                close.addEventListener("click", function() {
+                    pageContainer.removeChild(videoMask);
+                });
+            });
+        }
+    </script>
+</div>
+</body>
+</html>

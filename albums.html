@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{theme/vCard/layout}">
+
+<head></head>
+<body>
+<div layout:fragment="content">
+    <div class="box box-content">
+        <div class="pb-2">
+            <h1 class="title title--h1 first-title title__separate">专辑([[${albumNum}]])</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-6" th:each="album,iterStat: ${albumList}">
+                <div class="album-item animate-box">
+                    <a data-pjax th:href="@{'/albumDetail/' + ${album.id} + '/'}">
+                        <img th:data-original="@{${album.coverUrl}}" class="lazyload">
+                        <div class="descr">
+                            <span th:if="${album.visitType == 0}"><i class="fa fa-lock"></i></span> [[${album.name}]]<span> ([[${album.detailNum}]])</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div th:if="${albumNum == 0}" th:style="'text-align:center;'" th:text="'~~作者偷懒，没有创建专辑栏目~~'"></div>
+    </div>
+</div>
+</body>
+</html>

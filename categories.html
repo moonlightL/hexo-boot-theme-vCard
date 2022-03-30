@@ -9,22 +9,21 @@
 			   <h1 class="title title--h1 first-title title__separate">分类([[${categoryNum}]])</h1>
 		   </div>
 
-		   <!-- Gallery -->
-		   <div class="gallery-grid js-grid-row js-filter-container">
-			   <div class="gutter-sizer"></div>
-			   <!-- Item 1 -->
-			   <figure class="gallery-grid__item category-concept" th:each="category,iterStat: ${categoryList}">
-				   <div class="gallery-grid__image-wrap">
-					   <a th:href="@{'/categories/'+${category.name}+'/'}">
-						   <img class="gallery-grid__image cover lazyload" th:src="@{${category.coverUrl}}" data-zoom alt="" />
+		   <div class="row">
+			   <div class="col-sm-6 col-md-4" th:each="category,iterStat: ${categoryList}">
+				   <div class="category-item">
+					   <a data-pjax th:href="@{'/categories/'+${category.name}+'/'}">
+						   <img th:data-original="@{${category.coverUrl}}" class="lazyload">
+						   <div class="mask"><span>[[${category.remark}]]</span></div>
+						   <div class="descr">
+							   [[${category.name}]]<span>([[${category.postNum}]])</span>
+						   </div>
 					   </a>
 				   </div>
-				   <figcaption class="gallery-grid__caption">
-					   <h4 class="title title--h6 gallery-grid__title" style="text-align: center">[[${category.name}]]<span>([[${category.postNum}]])</span></h4>
-				   </figcaption>
-			   </figure>
+			   </div>
+		   </div>
+		   <div th:if="${count == 0}" th:style="'text-align:center;'" th:text="'~~作者偷懒，没有创建分类栏目~~'"></div>
 
-		   </div><!-- Gallery End -->
 	   </div>
    </div>
 </body>

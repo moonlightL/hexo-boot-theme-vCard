@@ -3,17 +3,41 @@
   "remark": "vCard主题",
   "extension": [
     {
+      "key": "version",
+      "value": "2.0",
+      "type": "input",
+      "label": "版本号",
+      "update": true
+    },
+    {
       "key": "pageSize",
       "value": "10",
       "type": "input",
-      "label": "页面大小"
+      "label": "页面大小",
+      "update": false
+    },
+    {
+      "key": "useCDN",
+      "value": "false",
+      "type": "select",
+      "option": "true,false",
+      "label": "启用CDN",
+      "update": false
+    },
+    {
+      "key": "CDNAddress",
+      "value": "https://cdn.jsdelivr.net/gh/moonlightL/vCard@2.0",
+      "type": "input",
+      "label": "CDN地址",
+      "update": true
     },
     {
       "key": "commentShowType",
       "value": "singleRow",
       "type": "select",
       "option": "singleRow,multiRow",
-      "label": "评论列表展示"
+      "label": "评论列表展示",
+      "update": false
     }
   ]
 }

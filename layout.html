@@ -10,22 +10,20 @@
     <meta name="keywords" th:content="${#servletContext.getAttribute('configMap')['keywords']}" />
     <meta name="referrer" content="no-referrer" />
     [(${#servletContext.getAttribute('configMap')['meta_code']})]
+    <link rel="dns-prefetch" th:href="@{'//cdn.jsdelivr.net'}">
     <link rel="shortcut icon" th:href="@{${#servletContext.getAttribute('configMap')['favicon_url']}}"/>
-    <!-- Favicons -->
-    <link rel="shortcut icon" th:href="@{${baseLink} + '/source/images/favicons/favicon.png'}" type="image/png">
-    <link rel="stylesheet" th:href="@{${baseLink} + '/source/styles/animate.css'}">
     <link rel="stylesheet" th:href="@{${baseLink} + '/source/js/bootstrap-3.3.7/css/bootstrap.min.css'}">
     <link rel="stylesheet" th:href="@{${baseLink} + '/source/fonts/font-awesome/css/font-awesome.min.css'}"/>
-    <link rel="stylesheet" th:href="@{'/admin/assets/custom/jquery-search/jquery.search.css'}"/>
-    <link rel="stylesheet" th:href="@{'/admin/assets/js/plugins/highlightjs/styles/github-gist.css'}"/>
+    <link rel="stylesheet" th:href="@{${baseLink} + '/source/js/iziModal/css/iziModal.min.css'}">
+    <link rel="stylesheet" th:href="@{${baseLink} + '/source/styles/animate.css'}">
+    <link rel="stylesheet" th:href="@{${baseLink} + '/source/js/highlightjs/styles/github-gist.css'}"/>
     <link rel="stylesheet" th:href="@{${baseLink} + '/source/js/fancybox/jquery.fancybox.min.css'}"/>
     <link rel="stylesheet" th:href="@{${baseLink} + '/source/js/overshare/css/share.min.css'}"/>
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" th:href="@{${prefix} + '/source/styles/style.css'}"/>
-    <script th:src="@{${baseLink} + '/source/js/jquery-3.4.1.min.js'}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{${prefix} + '/source/styles/app.css?v=' + ${activeTheme.configMap['version']}}"/>
 </head>
 <body>
-<!-- Preloader -->
+
 <div class="preloader">
     <div class="preloader__wrap">
         <div class="circle-pulse">
@@ -42,15 +40,19 @@
 <main class="main">
     <!-- Header Image -->
     <div class="header-image">
-        <div class="js-parallax" th:style="'background-image: url(' + ${prefix} + '/source/images/image_header.jpg' + ');'"></div>
+        <div class="js-parallax" th:if="${#strings.isEmpty(currentNav.cover)}" th:style="'background-image: url(' + ${prefix} + '/source/images/image_header.jpg' + ');'"></div>
+        <div class="js-parallax" th:unless="${#strings.isEmpty(currentNav.cover)}" th:style="'background-image: url(' + ${currentNav.cover} + ');'"></div>
     </div>
 
-    <div class="container gutter-top">
+    <div class="container gutter-top" id="pageContainer">
         <!-- Header -->
         <header class="header box">
             <div class="header__left">
                 <div class="header__photo">
-                    <img class="header__photo-img" th:src="@{${#strings.isEmpty(#servletContext.getAttribute('configMap')['logo_url']) != true ? #servletContext.getAttribute('configMap')['logo_url'] : prefix + '/source/images/logo.svg'}}" width="48" height="48">
+                    <a th:href="@{/about/}">
+                        <img class="header__photo-img" th:src="@{${#strings.isEmpty(#servletContext.getAttribute('configMap')['blog_avatar']) != true ? #servletContext.getAttribute('configMap')['blog_avatar'] :
+                        (#strings.isEmpty(#servletContext.getAttribute('configMap')['logo_url']) !=true ? #servletContext.getAttribute('configMap')['logo_url'] : prefix + '/source/images/logo.svg')}}">
+                    </a>
                 </div>
                 <div class="header__base-info">
                     <h2 class="title titl--h4" th:text="${#servletContext.getAttribute('configMap')['blog_name']}"></h2>
@@ -68,8 +70,8 @@
                     <li><a th:href="@{/categories/}"><span class="overhead">分类数</span><span th:text="${#servletContext.getAttribute('categoryNum')}">无</span></a></li>
                 </ul>
                 <ul class="header__contact">
+                    <li><a th:href="@{/tags/}"><span class="overhead">标签数</span><span th:text="${#servletContext.getAttribute('tagNum')}"></span></a></li>
                     <li><a th:href="@{/friendLinks/}"><span class="overhead">友链数</span><span th:text="${#servletContext.getAttribute('friendLinkNum')}"></span></a></li>
-                    <li><span class="overhead">运行天数</span><span id="runDay"></span></li>
                 </ul>
             </div>
         </header>
@@ -79,11 +81,11 @@
             <aside class="col-12 col-md-12 col-lg-2">
                 <div class="sidebar box sticky-column">
                     <ul class="nav">
-                        <li class="nav__item"><a th:href="@{/}" th:class="${menu eq 'index' ? 'active' : ''}"><i class="fa fa-home fa-2x"></i>主页</a></li>
-                        <li class="nav__item"><a th:href="@{/archives/}" th:class="${menu eq 'archives' ? 'active' : ''}"><i class="fa fa-file-archive-o fa-2x"></i>归档</a></li>
-                        <li class="nav__item"><a th:href="@{/categories/}" th:class="${menu eq 'categories' ? 'active' : ''}"><i class="fa fa-file-o fa-2x"></i> 分类</a></li>
-                        <li class="nav__item"><a th:href="@{/about/}" th:class="${menu eq 'about' ? 'active' : ''}"><i class="fa fa-user-o fa-2x"></i>关于</a></li>
-                        <li class="nav__item"><a href="javascript:void(0)" data-real-time-search><i class="fa fa-search fa-2x"></i>搜索</a></li>
+                        <li class="nav__item" th:each="nav : ${#servletContext.getAttribute('firstNav')}">
+                            <a th:href="@{${nav.link}}" th:data-link="${nav.link}" th:class="${currentNav.code eq nav.code ? 'item active' : 'item'}">
+                                <i th:class="${nav.icon}"></i> [[${nav.name}]]
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </aside>
@@ -113,47 +115,15 @@
 </svg>
 
 <!-- JavaScripts -->
-<script th:inline="javascript">let baseLink = [[${baseLink}]];</script>
-<script th:src="@{${prefix} + '/source/js/plugins.min.js'}"></script>
-<script th:src="@{'/admin/assets/js/plugins/layer/layer.js'}"></script>
-<script th:src="@{'/admin/assets/custom/jquery-search/jquery.hideseek.min.js'}" ></script>
-<script th:src="@{'/admin/assets/custom/jquery-search/jquery.search.js'}" ></script>
-<script th:src="@{'/admin/assets/js/plugins/clipboard/clipboard.min.js'}"></script>
-<script th:src="@{${baseLink} + '/source/js/jqueryLazyload/jquery.lazyload.min.js'}"></script>
-<script th:src="@{${prefix} + '/source/js/common.js'}"></script>
 <script th:inline="javascript">
-    let installTime = [[${#servletContext.getAttribute('configMap')['install_time']}]];
-    let $runDay = $("#runDay");
-    setInterval(function () {
-        let date1 = installTime;
-        let date2 = new Date();
-        let date3 = date2.getTime() - new Date(date1).getTime();
-        //计算出相差天数
-        let days = Math.floor(date3/(24*3600*1000));
-
-        //计算出小时数
-        let leave1 = date3%(24*3600*1000);
-        let hours = Math.floor(leave1/(3600*1000));
-        //计算相差分钟数
-        let leave2 = leave1%(3600*1000) ;
-        let minutes = Math.floor(leave2/(60*1000));
-        //计算相差秒数
-        let leave3 = leave2%(60*1000);
-        let seconds = Math.round(leave3/1000);
-        $runDay.html(days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒");
-    }, 1000);
+    let themeName = [[${activeTheme.name}]];
+    let version = [[${activeTheme.configMap['version']}]];
+    let baseLink = [[${baseLink}]];
 </script>
-
-<span th:if="${isDetail == true}">
-    <script type='text/javascript' th:src="@{${baseLink} + '/source/js/fancybox/jquery.fancybox.min.js'}"></script>
-    <script type='text/javascript' th:src="@{'/admin/assets/js/plugins/highlightjs/highlight.pack.js'}"></script>
-    <script type='text/javascript' th:src="@{${baseLink} + '/source/js/overshare/js/social-share.min.js'}"></script>
-    <script type='text/javascript'>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('figure span').forEach(function(block) {
-                hljs.highlightBlock(block);
-            });
-        });
-    </script>
-</span>
+<script th:src="@{${baseLink} + '/source/js/plugins.js'}"></script>
+<script th:src="@{${baseLink} + '/source/js/fancybox/jquery.fancybox.min.js'}"></script>
+<script th:src="@{${baseLink} + '/source/js/layer/layer.js'}"></script>
+<script th:src="@{${baseLink} + '/source/js/clipboard.min.js'}"></script>
+<script th:src="@{${prefix} + '/source/js/app.js?v=' + ${activeTheme.configMap['version']}}"></script>
+[(${#servletContext.getAttribute('configMap')['script_code']})]
 </body>

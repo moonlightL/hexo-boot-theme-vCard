@@ -24,11 +24,11 @@
 					</div>
 				</header>
 
-				<div class="caption-post post-content" th:data-id="${post.id}" th:utext="${post.contentHtml}"></div>
+				<div id="post-content" class="caption-post post-content" th:data-id="${post.id}" th:utext="${post.contentHtml}"></div>
 
 				<div id="share" class="shareContainer">
 					<div class="btns">
-						<button type="button" class="btn btn-default" id="priseBtn"><i class="fa fa-thumbs-o-up"></i> <span id="prizeCount">[[${post.praiseNum}]]</span></button>
+						<button type="button" class="btn btn-default" id="priseBtn" th:data-id="${post.id}"><i class="fa fa-thumbs-o-up"></i>&nbsp;<span id="prizeCount">[[${post.praiseNum}]]</span></button>
 					</div>
 				</div>
 

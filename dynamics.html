@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{theme/vCard/layout}">
+
+<head></head>
+<body>
+<div layout:fragment="content">
+    <div class="box box-content">
+        <div class="pb-2">
+            <h1 class="title title--h1 first-title title__separate">动态([[${pageInfo.total}]])</h1>
+        </div>
+
+        <div class="dynamic-content" id="dynamic-content">
+            <div class="dynamic-item animate-box" th:each="dynamic : ${pageInfo.list}" th:data-color="${dynamic.color}">
+                <div class="info">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="hidden-xs" width="48" height="48" th:src="@{${#strings.isEmpty(#servletContext.getAttribute('configMap')['blog_avatar']) != true ? #servletContext.getAttribute('configMap')['blog_avatar'] :
+                        (#strings.isEmpty(#servletContext.getAttribute('configMap')['logo_url']) !=true ? #servletContext.getAttribute('configMap')['logo_url'] : prefix + '/source/images/logo.svg')}}">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="content" th:utext="${dynamic.content}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="meta">
+                            <span class="date">
+                                <i class="fa fa-clock-o"></i> 发布于 [[${dynamic.timeDesc}]]
+                            </span>
+                    <a class="praise" href="javascript:void(0)" th:data-id="${dynamic.id}">
+                        <i class="fa fa-heart-o"></i>&nbsp;<span class="praise-num">[[${dynamic.praiseNum}]]</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav class="text-center">
+                    <span th:if="${pageInfo.hasPreviousPage}" class="page">
+                        <a data-pjax class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/dynamics/' : '/dynamics/page/' + ${pageInfo.pageNum-1}+'/'}" ><i class="fa fa-angle-left"></i></a>
+                    </span>
+            <span th:each="pageNum : ${pageInfo.navigatepageNums}" th:if="${pageInfo.navigatepageNums.length} le '4' " class="page">
+                        <a th:if="${pageNum == pageInfo.pageNum}" href="javascript:void(0)" class="page-numbers current" th:text="${pageNum}"></a>
+                        <span class="page" th:if="${pageNum != pageInfo.pageNum}">
+                            <a data-pjax th:href="@{'/dynamics/page/' + ${pageNum}+'/'}" th:text="${pageNum}"></a>
+                        </span>
+                    </span>
+            <span th:each="pageNum, iterStat : ${pageInfo.navigatepageNums}" th:if="${pageInfo.navigatepageNums.length} gt '4' " class="page">
+                       <span class="page" th:if="${pageNum == pageInfo.pageNum and iterStat.count gt 2 and iterStat.count le iterStat.size}">...</span>
+                       <a th:if="${pageNum == pageInfo.pageNum}" href="javascript:void(0)" class="page-numbers current" th:text="${pageNum}"></a>
+                       <span class="page" th:if="${pageNum == pageInfo.pageNum and iterStat.count le (iterStat.size - 2)}">...</span>
+                       <span th:if="${pageNum != pageInfo.pageNum}">
+                           <span class="page" th:if="${iterStat.count == 1}" ><a data-pjax th:href="@{'/dynamics/page/1/'}" th:text="1"></a></span>
+                           <span class="page" th:if="${iterStat.count == (iterStat.size)}"><a data-pjax th:href="@{'/dynamics/page/' + ${pageNum}+'/'}" th:text="${pageNum}"></a></span>
+                        </span>
+                   </span>
+            <span th:if="${pageInfo.hasNextPage}" class="page">
+                        <a data-pjax class="next page-numbers" th:href="@{'/dynamics/page/' + ${pageInfo.pageNum+1}+'/'}" ><i class="fa fa-angle-right"></i></a>
+                    </span>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

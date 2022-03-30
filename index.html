@@ -18,7 +18,7 @@
 						<div class="news-item__image-wrap overlay overlay--45" th:data-category="${post.categoryName}" th:data-tags="${#strings.isEmpty(post.tags) ? '无' : post.tags}">
 							<div class="news-item__date">[[${post.month + '月' + post.day + '日'}]]<span>[[${post.year}]]年</span></div>
 							<span class="new-item__top" th:if="${post.top}"><img src="/theme/vCard/source/images/article-top.png" alt="" width="64" height="64"></span>
-							<img class="cover lazyload" th:src="@{${post.coverUrl}}" alt="" />
+							<img class="cover lazyload" th:data-original="@{${post.coverUrl}}" alt="" />
 						</div>
 						<div class="news-item__caption">
 							<h2 class="title title--h4" th:text="${post.title}"></h2>
