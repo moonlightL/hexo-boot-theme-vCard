@@ -12,22 +12,26 @@
 
         <div class="ml-content-body">
             <div class="row" th:if="${album.detailType == 1}">
-                <div class="col-sm-6 col-md-3" th:each="detail,iterStat: ${pageInfo.data}">
+                <div class="col-sm-6 col-md-4" th:each="detail,iterStat: ${pageInfo.data}">
                     <div class="album-detail-item animate-box" data-animate-effect="fadeIn">
+                        <div class="album-detail-remark" th:text="${detail.remark}"></div>
                         <a class="fancybox" th:href="@{${detail.url}}" data-fancybox="gallery">
                             <img th:data-original="@{${detail.url}}" class="lazyload">
                             <div class="mask"><i class="fa fa-search-plus"></i></div>
                         </a>
+                        <div th:text="${detail.name}" class="album-detail-name"></div>
                     </div>
                 </div>
             </div>
             <div class="row" th:if="${album.detailType == 2}">
                 <div class="col-sm-12 col-md-4" th:each="detail,iterStat: ${pageInfo.data}">
                     <div class="album-detail-item animate-box">
+                        <div class="album-detail-remark" th:text="${detail.remark}"></div>
                         <a href="javascript:void(0)" th:data-url="${detail.url}" class="play-btn">
                             <img th:data-original="@{${detail.coverUrl}}" class="lazyload">
                             <div class="mask"><i class="fa fa-play"></i></div>
                         </a>
+                        <div th:text="${detail.name}" class="album-detail-name"></div>
                     </div>
                 </div>
             </div>
@@ -38,7 +42,7 @@
             </div>
         </div>
 
-        <nav class="text-center">
+        <nav class="text-center" style="margin-top: 2rem">
                     <span th:if="${pageInfo.hasPreviousPage}" class="page">
                         <a data-pjax class="prev page-numbers" th:href="@{${pageInfo.pageNum-1} == 1 ? '/albumDetail/' + ${album.id} + '/': '/albumDetail/' + ${album.id} + '/' + ${pageInfo.pageNum-1}+'/'}" ><i class="fa fa-angle-left"></i></a>
                     </span>

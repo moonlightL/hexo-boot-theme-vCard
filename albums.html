@@ -14,7 +14,10 @@
                 <div class="album-item animate-box">
                     <a data-pjax th:href="@{'/albumDetail/' + ${album.id} + '/'}">
                         <img th:data-original="@{${album.coverUrl}}" class="lazyload">
-                        <div class="descr">
+                        <div class="mask">
+                            <p th:text="${'简介: ' + album.remark}" class="descr"></p>
+                        </div>
+                        <div class="title">
                             <span th:if="${album.visitType == 0}"><i class="fa fa-lock"></i></span> [[${album.name}]]<span> ([[${album.detailNum}]])</span>
                         </div>
                     </a>

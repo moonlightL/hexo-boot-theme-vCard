@@ -343,7 +343,6 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 10px;
 }
 
 iframe {
@@ -2770,6 +2769,8 @@ nav .page a:not(.current):hover {
 }
 
 .album-item a {
+  position: relative;
+  display: inline-block;
   color: #888;
 }
 
@@ -2781,7 +2782,68 @@ nav .page a:not(.current):hover {
   width: 100%;
   height: 222px;
   object-fit: cover;
-  box-shadow: 0 1px 10px 6px #eee;
+  border-radius: 1rem;
+}
+
+.album-detail-item a img {
+  border-radius: 0;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.album-item a .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0 ,0, 0, .6);
+  color: #FFF;
+  width: 100%;
+  height: calc(100% - 24px);
+  opacity: 0;
+  transition: all .5s;
+  border-radius: 1rem;
+  padding: 4rem 3rem;
+}
+
+.album-item:hover .mask {
+  opacity: 1;
+}
+
+.album-item .descr {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.album-detail-item .album-detail-name,
+.album-detail-item .album-detail-remark {
+  text-align: center;
+  padding: 0.5rem;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.album-detail-item .album-detail-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.album-detail-item .album-detail-remark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  width: 100%;
+  background: rgba(0, 0, 0, .8);
+  z-index: 100;
+  opacity: 0;
+  transition: all .5s;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .album-item .album-cover {
@@ -2826,9 +2888,9 @@ nav .page a:not(.current):hover {
 
 .album-detail-item {
   position: relative;
-  margin: 1.5rem auto;
   height: 100%;
-  border-radius: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #e1e1e1;
 }
 
 .album-detail-item a .mask {
@@ -2840,10 +2902,11 @@ nav .page a:not(.current):hover {
   height: 222px;
   opacity: 0;
   transition: all .5s;
-  border-radius: 1rem;
 }
 
-.album-detail-item a:hover .mask {
+.album-detail-item:hover .album-detail-remark,
+.album-detail-item:hover .mask {
+  border-radius: 1rem 1rem 0 0;
   opacity: 1;
 }
 
@@ -2916,6 +2979,7 @@ nav .page a:not(.current):hover {
 .options:hover,
 .options .option-item:hover {
   background-color: #F7F9FA;
+  border-radius: 5px;
 }
 
 .search-form .search-query .input {
