@@ -2630,6 +2630,13 @@ nav .page a:not(.current):hover {
   word-break: break-word;
 }
 
+@media screen and (max-width: 768px) {
+  .post-content video {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .postContainer .post-tags {
   margin-top: 20px;
 }
@@ -2818,6 +2825,12 @@ nav .page a:not(.current):hover {
   -webkit-box-orient: vertical;
 }
 
+.album-detail-item a {
+  display: inline-block;
+  border: 1px solid #e1e1e1;
+  border-radius: 1rem 1rem 0 0;
+}
+
 .album-detail-item .album-detail-name,
 .album-detail-item .album-detail-remark {
   text-align: center;
@@ -2831,6 +2844,9 @@ nav .page a:not(.current):hover {
 .album-detail-item .album-detail-name {
   font-weight: bold;
   font-size: 1rem;
+  border: 1px solid #e1e1e1;
+  border-top: 0;
+  border-radius: 0 0 1rem 1rem;
 }
 
 .album-detail-item .album-detail-remark {
@@ -2844,6 +2860,9 @@ nav .page a:not(.current):hover {
   opacity: 0;
   transition: all .5s;
   border-radius: 1rem 1rem 0 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .album-item .album-cover {
@@ -2889,8 +2908,7 @@ nav .page a:not(.current):hover {
 .album-detail-item {
   position: relative;
   height: 100%;
-  border-radius: 1rem;
-  border: 1px solid #e1e1e1;
+  margin-bottom: 2rem;
 }
 
 .album-detail-item a .mask {

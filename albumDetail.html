@@ -13,8 +13,8 @@
         <div class="ml-content-body">
             <div class="row" th:if="${album.detailType == 1}">
                 <div class="col-sm-6 col-md-4" th:each="detail,iterStat: ${pageInfo.data}">
-                    <div class="album-detail-item animate-box" data-animate-effect="fadeIn">
-                        <div class="album-detail-remark" th:text="${detail.remark}"></div>
+                    <div class="album-detail-item">
+                        <div class="album-detail-remark" th:text="${detail.remark}" th:title="${detail.remark}"></div>
                         <a class="fancybox" th:href="@{${detail.url}}" data-fancybox="gallery">
                             <img th:data-original="@{${detail.url}}" class="lazyload">
                             <div class="mask"><i class="fa fa-search-plus"></i></div>
@@ -25,8 +25,8 @@
             </div>
             <div class="row" th:if="${album.detailType == 2}">
                 <div class="col-sm-12 col-md-4" th:each="detail,iterStat: ${pageInfo.data}">
-                    <div class="album-detail-item animate-box">
-                        <div class="album-detail-remark" th:text="${detail.remark}"></div>
+                    <div class="album-detail-item">
+                        <div class="album-detail-remark" th:text="${detail.remark}" th:title="${detail.remark}"></div>
                         <a href="javascript:void(0)" th:data-url="${detail.url}" class="play-btn">
                             <img th:data-original="@{${detail.coverUrl}}" class="lazyload">
                             <div class="mask"><i class="fa fa-play"></i></div>
