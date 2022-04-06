@@ -96,7 +96,12 @@
                 <!-- Footer -->
                 <div style="text-align: center; margin-top: 1rem" th:utext="${#servletContext.getAttribute('configMap')['power_by']}">© 2020 vCard</div>
                 <footer id="footer-copyright" class="footer">
-                    <a href="https://beian.miit.gov.cn/" target="_blank" th:utext="${#servletContext.getAttribute('configMap')['record']}"></a>
+                    <span th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['gongan_record']) != true}">
+                        <img th:src="@{${baseLink} + '/source/images/beian.png'}" alt="">&nbsp;<a th:href="@{'http://www.beian.gov.cn/portal/registerSystemInfo?'}" target="_blank" th:text="${#servletContext.getAttribute('configMap')['gongan_record']}"></a>
+                    </span>
+                    <span th:if="${#strings.isEmpty(#servletContext.getAttribute('configMap')['icp_record']) != true}">&nbsp;
+                        <a href="https://beian.miit.gov.cn/" target="_blank" th:text="${#servletContext.getAttribute('configMap')['icp_record']}"></a>
+                    </span>
                 </footer>
             </div>
         </div>
