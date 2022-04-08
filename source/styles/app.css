@@ -2723,7 +2723,7 @@ nav .page a:not(.current):hover {
 .dynamic-item .info .content img.custom-img,
 .dynamic-item .info .content video,
 .dynamic-item .info .content iframe {
-  max-width: 720px !important;
+  max-width: 652px !important;
   max-height: 368px !important;
   object-fit: cover;
 }
