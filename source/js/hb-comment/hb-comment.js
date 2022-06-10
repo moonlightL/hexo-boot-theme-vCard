@@ -61,7 +61,6 @@
         let headNode = document.querySelector("head");
         let commentLink = getElementByClassName(headNode, "hb-comment-css");
         if (commentLink) {
-            console.log("已加载")
             return;
         }
         let self = this;
@@ -78,10 +77,103 @@
 
         self.emojiManager = {
             emojiArr: [],
-            typeArr: ["微博表情", "贴吧表情"]
-        }
+            typeArr: ["QQ表情", "微博表情", "贴吧表情"]
+        };
 
         self.emojiManager.emojiArr[0] = [
+            {'title':'q_微笑','url':'qq/weixiao.gif'},
+            {'title':'q_撇嘴','url':'qq/piezui.gif'},
+            {'title':'q_色','url':'qq/se.gif'},
+            {'title':'q_发呆','url':'qq/fadai.gif'},
+            {'title':'q_得意','url':'qq/deyi.gif'},
+            {'title':'q_流泪','url':'qq/liulei.gif'},
+            {'title':'q_害羞','url':'qq/haixiu.gif'},
+            {'title':'q_闭嘴','url':'qq/bizui.gif'},
+            {'title':'q_睡','url':'qq/shui.gif'},
+            {'title':'q_大哭','url':'qq/daku.gif'},
+            {'title':'q_尴尬','url':'qq/ganga.gif'},
+            {'title':'q_发怒','url':'qq/fanu.gif'},
+            {'title':'q_调皮','url':'qq/tiaopi.gif'},
+            {'title':'q_呲牙','url':'qq/ciya.gif'},
+            {'title':'q_惊讶','url':'qq/jingya.gif'},
+            {'title':'q_难过','url':'qq/nanguo.gif'},
+            {'title':'q_酷','url':'qq/ku.gif'},
+            {'title':'q_冷汗','url':'qq/lenghan.gif'},
+            {'title':'q_抓狂','url':'qq/zhuakuang.gif'},
+            {'title':'q_吐','url':'qq/tu.gif'},
+            {'title':'q_偷笑','url':'qq/touxiao.gif'},
+            {'title':'q_可爱','url':'qq/keai.gif'},
+            {'title':'q_白眼','url':'qq/baiyan.gif'},
+            {'title':'q_傲慢','url':'qq/aoman.gif'},
+            {'title':'q_饥饿','url':'qq/jie.gif'},
+            {'title':'q_困','url':'qq/kun.gif'},
+            {'title':'q_惊恐','url':'qq/jingkong.gif'},
+            {'title':'q_流汗','url':'qq/liuhan.gif'},
+            {'title':'q_憨笑','url':'qq/hanxiao.gif'},
+            {'title':'q_悠闲','url':'qq/youxian.gif'},
+            {'title':'q_奋斗','url':'qq/fendou.gif'},
+            {'title':'q_咒骂','url':'qq/zhouma.gif'},
+            {'title':'q_疑问','url':'qq/yiwen.gif'},
+            {'title':'q_嘘','url':'qq/xu.gif'},
+            {'title':'q_晕','url':'qq/yun.gif'},
+            {'title':'q_折磨','url':'qq/zhemo.gif'},
+            {'title':'q_衰','url':'qq/shuai.gif'},
+            {'title':'q_骷髅','url':'qq/kulou.gif'},
+            {'title':'q_敲打','url':'qq/qiaoda.gif'},
+            {'title':'q_再见','url':'qq/zaijian.gif'},
+            {'title':'q_擦汗','url':'qq/cahan.gif'},
+            {'title':'q_抠鼻','url':'qq/koubi.gif'},
+            {'title':'q_鼓掌','url':'qq/guzhang.gif'},
+            {'title':'q_糗大了','url':'qq/qiudale.gif'},
+            {'title':'q_坏笑','url':'qq/huaixiao.gif'},
+            {'title':'q_左哼哼','url':'qq/zuohengheng.gif'},
+            {'title':'q_右哼哼','url':'qq/youhengheng.gif'},
+            {'title':'q_哈欠','url':'qq/haqian.gif'},
+            {'title':'q_鄙视','url':'qq/bishi.gif'},
+            {'title':'q_委屈','url':'qq/weiqu.gif'},
+            {'title':'q_快哭了','url':'qq/kuaikule.gif'},
+            {'title':'q_阴险','url':'qq/yinxian.gif'},
+            {'title':'q_左亲亲','url':'qq/zuoqinqin.gif'},
+            {'title':'q_吓','url':'qq/xia.gif'},
+            {'title':'q_可怜','url':'qq/kelian.gif'},
+            {'title':'q_菜刀','url':'qq/caidao.gif'},
+            {'title':'q_啤酒','url':'qq/pijiu.gif'},
+            {'title':'q_咖啡','url':'qq/kafei.gif'},
+            {'title':'q_饭','url':'qq/fan.gif'},
+            {'title':'q_猪头','url':'qq/zhutou.gif'},
+            {'title':'q_玫瑰','url':'qq/meigui.gif'},
+            {'title':'q_凋谢','url':'qq/diaoxie.gif'},
+            {'title':'q_示爱','url':'qq/shiai.gif'},
+            {'title':'q_爱心','url':'qq/aixin.gif'},
+            {'title':'q_心碎','url':'qq/xinsui.gif'},
+            {'title':'q_蛋糕','url':'qq/dangao.gif'},
+            {'title':'q_闪电','url':'qq/shandian.gif'},
+            {'title':'q_炸弹','url':'qq/zhadan.gif'},
+            {'title':'q_刀','url':'qq/dao.gif'},
+            {'title':'q_足球','url':'qq/zuqiu.gif'},
+            {'title':'q_瓢虫','url':'qq/piaochong.gif'},
+            {'title':'q_便便','url':'qq/bianbian.gif'},
+            {'title':'q_拥抱','url':'qq/yongbao.gif'},
+            {'title':'q_赞','url':'qq/zan.gif'},
+            {'title':'q_踩','url':'qq/cai.gif'},
+            {'title':'q_握手','url':'qq/woshou.gif'},
+            {'title':'q_胜利','url':'qq/shengli.gif'},
+            {'title':'q_抱拳','url':'qq/baoquan.gif'},
+            {'title':'q_勾引','url':'qq/gouyin.gif'},
+            {'title':'q_拳头','url':'qq/quantou.gif'},
+            {'title':'q_差劲','url':'qq/chajin.gif'},
+            {'title':'q_爱你','url':'qq/aini.gif'},
+            {'title':'q_NO','url':'qq/NO.gif'},
+            {'title':'q_OK','url':'qq/OK.gif'},
+            {'title':'q_跳跳','url':'qq/tiaotiao.gif'},
+            {'title':'q_发抖','url':'qq/fadou.gif'},
+            {'title':'q_恼火','url':'qq/naohuo.gif'},
+            {'title':'q_磕头','url':'qq/ketou.gif'},
+            {'title':'q_回头','url':'qq/huitou.gif'},
+            {'title':'q_激动','url':'qq/jidong.gif'},
+            {'title':'q_街舞','url':'qq/jiewu.gif'},
+        ];
+        self.emojiManager.emojiArr[1] = [
             {'title':'微笑','url':'weibo/weixiao.gif'},
             {'title':'嘻嘻','url':'weibo/xixi.gif'},
             {'title':'哈哈','url':'weibo/haha.gif'},
@@ -155,7 +247,7 @@
             {'title':'蛋糕','url':'weibo/dangao.gif'},
             {'title':'发红包','url':'weibo/fahongbao.gif'}
         ];
-        self.emojiManager.emojiArr[1] = [
+        self.emojiManager.emojiArr[2] = [
             {'title': '_呵呵', 'url': 'tieba/hehe.jpg'},
             {'title': '_哈哈', 'url': 'tieba/haha.jpg'},
             {'title': '_吐舌', 'url': 'tieba/tushe.jpg'},
@@ -238,7 +330,7 @@
             htmlArr.push("<a href='javascript:void(0)' class='change_avatar'>换一张</a>")
         }
         htmlArr.push('</div>');
-        htmlArr.push('<div class="main">');
+        htmlArr.push('<div class="hb-main">');
         htmlArr.push('<div class="hb-comment-info">');
         if (self.visitor) {
             htmlArr.push('<span class="label-item"><span class="label">邮箱</span><input type="text" name="email" value="' + self.visitor.email + '" class="hb_email" readonly="readonly" placeholder="必填,qq邮箱可自动获取头像和昵称"></span>');
@@ -251,11 +343,19 @@
         }
         htmlArr.push('</div>');
         htmlArr.push('<div class="hb-comment-content">');
-        htmlArr.push('<textarea name="content" class="hb_content" placeholder="写点内容吧~"></textarea>');
+        if (self.options.canComment) {
+            htmlArr.push('<textarea name="content" class="hb_content" placeholder="写点内容吧~"></textarea>');
+        } else {
+            htmlArr.push('<textarea name="content" class="hb_content" placeholder="本篇文章已关闭评论" disabled="disabled"></textarea>');
+        }
         htmlArr.push('</div>');
         htmlArr.push('<div class="hb-comment-help">');
         htmlArr.push('<span title="表情" class="emoji_btn">☺</span>');
-        htmlArr.push('<button type="button" class="send_btn"><span class="glyphicon glyphicon-send"></span> 发送</button>');
+        if (self.options.canComment) {
+            htmlArr.push('<button type="button" class="send_btn"><span class="glyphicon glyphicon-send"></span> 发送</button>');
+        } else {
+            htmlArr.push('<button type="button" class="send_btn"><span class="glyphicon glyphicon-send"></span> 禁用</button>');
+        }
         htmlArr.push('</div>');
         htmlArr.push('</div>');
         htmlArr.push('</div>');
@@ -338,7 +438,7 @@
             htmlArr.push('<div class="avatar">');
             htmlArr.push('<img id="'+ comment.id +'" src="'+ comment.avatar +'" width="48" height="48">');
             htmlArr.push('</div>');
-            htmlArr.push('<div class="main">');
+            htmlArr.push('<div class="hb-main">');
             htmlArr.push('<div class="info">');
             let bloggerHtml = comment.blogger ? ' <span class="blogger">博主</span>' : '';
             bloggerHtml += '<span> ' + comment.date + '</span>';
@@ -359,7 +459,7 @@
                 if (parent) {
                     let bloggerHtml = parent.blogger ? ' <span class="blogger">[博主]</span>' : '';
                     htmlArr.push('<blockquote class="original-content">');
-                    htmlArr.push('<p><b>'+ parent.nickname + bloggerHtml + ':</b> '+ formatContent(parent.content) +'</p>');
+                    htmlArr.push('<p><b>'+ parent.nickname + bloggerHtml + ':</b> <br>'+ formatContent(parent.content) +'</p>');
                     htmlArr.push('</blockquote>');
                 }
                 htmlArr.push('<div class="extras">');
@@ -377,7 +477,7 @@
                         htmlArr.push('<div class="avatar">');
                         htmlArr.push('<img id="'+ replyComment.id +'" src="'+ replyComment.avatar +'" width="48" height="48">');
                         htmlArr.push('</div>');
-                        htmlArr.push('<div class="main">');
+                        htmlArr.push('<div class="hb-main">');
                         htmlArr.push('<div class="info">');
                         let bloggerHtml = replyComment.blogger ? ' <span class="blogger">博主</span>' : '';
                         bloggerHtml += '<span> ' + comment.date + '</span>';
@@ -495,7 +595,7 @@
 
                 sendRequest({
                     type: "GET",
-                    url: "https://api.mou.ge/api/qq?qq=" + qq,
+                    url: "/getQQInfo/" + qq,
                     success: function(resp) {
                         getElementByClassName(commentBody, "hb_avatar").setAttribute("src", resp.data.avatar);
                         getElementByClassName(commentBody, "hb_nickname").value = resp.data.name;
@@ -522,7 +622,7 @@
                 return;
             }
 
-            let htmlArr = ['<div class="emoji-panel emoji"><div class="emoji" style="height: 2rem;background-color: #8fabbb"></div>'];
+            let htmlArr = ['<div class="emoji-panel emoji"><div class="emoji" style="min-height: 1rem;"></div>'];
             let emojiManager = self.emojiManager;
             let emojiArr = emojiManager.emojiArr;
             for (let i = 0; i < emojiArr.length; i++) {
@@ -530,11 +630,11 @@
                 let active = (i == 0 ? ' active' : '');
                 htmlArr.push('<ul id="emoji_ul_' + i +'" class="emoji emoji-ul ' + active + '">');
                 emojiArrElements.forEach(function(item, index) {
-                    htmlArr.push('<li title="'+ item.title +'" class="emoji emoji-item"><img class="emoji" src="'+ HbComment.emojiCache[item.title] +'"/></li>');
+                    htmlArr.push('<li title="'+ item.title +'" class="emoji emoji-item"><img class="emoji" src="'+ HbComment.emojiCache[item.title] +'" /></li>');
                 });
                 htmlArr.push('</ul>');
             }
-            htmlArr.push('<div style="clear: both;border-top: 1px solid #f1f1f1;height: 2.5rem;" class="emoji">');
+            htmlArr.push('<div style="clear: both;border-top: 1px solid #f1f1f1;height: 1.8rem;" class="emoji">');
             for (let i = 0; i < emojiArr.length; i++) {
                 let active = (i == 0 ? ' active' : '');
                 htmlArr.push('<span id="emoji_tab_' + i + '" class="emoji emoji-tab ' + active + '">' + emojiManager.typeArr[i] + '</span>');
@@ -639,7 +739,11 @@
                         self.visitor = data;
                         self.refresh(self.options, true);
                     } else {
-                        showTip(resp.message, 5000);
+                        showTip(resp.message, 4000, function() {
+                            if (resp.code == 2005) {
+                                window.location.reload();
+                            }
+                        });
                     }
                 }
             });
@@ -669,6 +773,7 @@
 
     HbComment.prototype.registerREvent = function() {
         let self = this;
+        let commentEL = document.querySelector(self.options.el);
         let replyArr = document.querySelectorAll(".action-reply");
         let hbW = document.querySelector(".hb-w");
         for (let i = 0; i < replyArr.length; i++) {
@@ -680,7 +785,7 @@
                 let index = infoNode.className.indexOf("reply");
                 if (index == -1) {
                     infoNode.setAttribute("class", "info reply");
-                    let mainArr = document.querySelectorAll(".main");
+                    let mainArr = getElementsByClassName(commentEL, "hb-main");
                     for (let i = 0; i < mainArr.length; i++) {
                         let mainElement = mainArr[i];
                         let commentBody = getElementByClassName(mainElement, "hb-w-body");
@@ -846,7 +951,7 @@
         return "";
     }
 
-    function showTip(content, second) {
+    function showTip(content, second, fn) {
         let timeout = (second || 2000);
         let tipNode = document.createElement("div");
         tipNode.className = "hb-comment-tip";
@@ -855,6 +960,9 @@
 
         setTimeout(function() {
             document.body.removeChild(tipNode);
+            if (typeof fn == "function") {
+                fn();
+            }
         }, timeout);
 
     }
